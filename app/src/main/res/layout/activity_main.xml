@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/lowerLimitLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -21,30 +21,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/lowerLimitBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintEnd_toEndOf="@+id/lowerLimitLabel"
+        app:layout_constraintStart_toStartOf="@+id/lowerLimitLabel"
+        app:layout_constraintTop_toBottomOf="@+id/lowerLimitLabel" />
 
     <SeekBar
-        android:id="@+id/seekBar2"
+        android:id="@+id/upperLimitBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintEnd_toEndOf="@+id/upperLimitLabel"
+        app:layout_constraintStart_toStartOf="@+id/upperLimitLabel"
+        app:layout_constraintTop_toBottomOf="@+id/upperLimitLabel" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/upperLimitLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/notify_when_battery_above"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+        app:layout_constraintEnd_toEndOf="@+id/lowerLimitLabel"
+        app:layout_constraintStart_toStartOf="@+id/lowerLimitLabel"
+        app:layout_constraintTop_toBottomOf="@+id/lowerLimitBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

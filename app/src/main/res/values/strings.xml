@@ -4,6 +4,6 @@
     <string name="channel_description">Notifications of the Battery Protector</string>
     <string name="low_battery_title">Battery charge level below 20%</string>
     <string name="low_battery_description">Extend battery life by keeping the charge level above %d</string>
-    <string name="notify_when_battery_below">Notify when state of charge is below %d&#37;</string>
-    <string name="notify_when_battery_above">Notify when state of charge is above %d&#37;</string>
+    <string name="notify_when_battery_below">Notify when state of charge is below %d%%</string>
+    <string name="notify_when_battery_above">Notify when state of charge is above %d%%</string>
 </resources>
