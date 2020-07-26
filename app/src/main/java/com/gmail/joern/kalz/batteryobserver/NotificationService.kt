@@ -1,5 +1,6 @@
 package com.gmail.joern.kalz.batteryobserver
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -23,12 +24,15 @@ class NotificationService @Inject constructor(
     fun show(title: String, text: String) {
         initialize()
 
-        val builder = notificationCompatBuilder
-            .setSmallIcon(R.mipmap.ic_launcher)
-            .setContentTitle(title)
-            .setContentText(text)
-            .setAutoCancel(true)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        val builder = notificationCompatBuilder.apply {
+            setSmallIcon(R.mipmap.ic_launcher)
+            setContentTitle(title)
+            setContentText(text)
+            setAutoCancel(true)
+            priority = NotificationCompat.PRIORITY_DEFAULT
+            setDefaults(Notification.DEFAULT_SOUND or Notification.DEFAULT_LIGHTS or
+                    Notification.DEFAULT_VIBRATE)
+        }
 
         defaultChannelNotificationManagerCompat.notify(NOTIFICATION_ID, builder.build())
     }
