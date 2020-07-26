@@ -14,30 +14,11 @@ private const val minimumBatteryLevel = 20
 class BatteryCheckWorker @WorkerInject constructor(
     @Assisted private val context: Context,
     @Assisted workerParams: WorkerParameters,
-    private val notificationService: NotificationService,
-    private val batteryChangedIntentFilter: IntentFilter
+    private val batteryNotificationUpdater: BatteryNotificationUpdater
 ) : Worker(context, workerParams) {
 
     override fun doWork(): Result {
-        val batteryLevel = checkBatteryLevel()
-
-        if (batteryLevel != null) {
-            val title = context.getString(R.string.low_battery_title)
-            val text = context.getString(R.string.low_battery_description, minimumBatteryLevel)
-
-            notificationService.show(title, text)
-        }
-
+        batteryNotificationUpdater.update()
         return Result.success()
-    }
-
-    private fun checkBatteryLevel(): Float? {
-        val batteryStatus: Intent? = context.registerReceiver(null, batteryChangedIntentFilter)
-
-        return batteryStatus?.let { intent ->
-            val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
-            val scale: Int = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
-            level * 100 / scale.toFloat()
-        }
     }
 }
