@@ -43,4 +43,9 @@ class BatteryModuleTest {
         assertNotNull(BatteryModule.notificationCompatBuilder(context, "test"))
     }
 
+    @Test
+    fun shouldProvideSharedPreferences() {
+        assertNotNull(BatteryModule.sharedPreferences(context))
+    }
+
 }
