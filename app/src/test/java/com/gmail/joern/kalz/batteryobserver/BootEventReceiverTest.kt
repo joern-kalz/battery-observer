@@ -8,14 +8,16 @@ import org.mockito.BDDMockito.*
 
 class BootEventReceiverTest {
 
-    val bootEventReceiver = BootEventReceiver()
-    val batteryCheckService = mock(BatteryCheckService::class.java)
-    val context = mock(Context::class.java)
-    val intent = mock(Intent::class.java)
+    private val bootEventReceiver = BootEventReceiver()
+    private val batteryCheckService = mock(BatteryCheckService::class.java)
+    private val batteryNotificationUpdater = mock(BatteryNotificationUpdater::class.java)
+    private val context = mock(Context::class.java)
+    private val intent = mock(Intent::class.java)
 
     @Before
     fun setup() {
         bootEventReceiver.batteryCheckService = batteryCheckService
+        bootEventReceiver.batteryNotificationUpdater = batteryNotificationUpdater
     }
 
     @Test

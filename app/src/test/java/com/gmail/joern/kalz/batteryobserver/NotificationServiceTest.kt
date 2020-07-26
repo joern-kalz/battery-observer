@@ -37,16 +37,6 @@ class NotificationServiceTest {
             .willReturn("")
         given(context.getSystemService(Context.NOTIFICATION_SERVICE))
             .willReturn(notificationManager)
-        given(notificationCompatBuilder.setSmallIcon(anyInt()))
-            .willReturn(notificationCompatBuilder)
-        given(notificationCompatBuilder.setContentTitle(anyString()))
-            .willReturn(notificationCompatBuilder)
-        given(notificationCompatBuilder.setContentText(anyString()))
-            .willReturn(notificationCompatBuilder)
-        given(notificationCompatBuilder.setAutoCancel(anyBoolean()))
-            .willReturn(notificationCompatBuilder)
-        given(notificationCompatBuilder.setPriority(anyInt()))
-            .willReturn(notificationCompatBuilder)
     }
 
     @Test
