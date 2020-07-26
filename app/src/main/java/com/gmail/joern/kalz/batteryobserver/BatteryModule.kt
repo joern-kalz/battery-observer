@@ -3,6 +3,7 @@ package com.gmail.joern.kalz.batteryobserver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.SharedPreferences
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.WorkManager
@@ -41,4 +42,11 @@ object BatteryModule {
         @DefaultNotificationChannel channel: String
     ): NotificationCompat.Builder =
         NotificationCompat.Builder(context, channel)
+
+    @Provides
+    fun sharedPreferences(@ApplicationContext context: Context): SharedPreferences =
+        context.getSharedPreferences(
+            context.getString(R.string.preferences_file),
+            Context.MODE_PRIVATE
+        )
 }

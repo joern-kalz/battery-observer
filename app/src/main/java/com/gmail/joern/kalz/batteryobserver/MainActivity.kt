@@ -11,13 +11,27 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     @Inject lateinit var batteryCheckService: BatteryCheckService
+    @Inject lateinit var preferencesService: PreferencesService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        findViewById<SeekBar>(R.id.lowerLimitBar)
-            .setOnSeekBarChangeListener(LowerLimitBarListener())
+        val lowerLimit = preferencesService.lowerStateOfChargeLimit
+        val upperLimit = preferencesService.upperStateOfChargeLimit
+
+        updateLowerLimitLabel(lowerLimit)
+        updateUpperLimitLabel(upperLimit)
+
+        findViewById<SeekBar>(R.id.lowerLimitBar).apply {
+            progress = lowerLimit
+            setOnSeekBarChangeListener(LowerLimitBarListener())
+        }
+
+        findViewById<SeekBar>(R.id.upperLimitBar).apply {
+            progress = upperLimit
+            setOnSeekBarChangeListener(UpperLimitBarListener())
+        }
 
         batteryCheckService.activate()
     }
@@ -39,7 +53,11 @@ class MainActivity : AppCompatActivity() {
 
         override fun onStartTrackingTouch(p0: SeekBar?) { }
 
-        override fun onStopTrackingTouch(p0: SeekBar?) { }
+        override fun onStopTrackingTouch(p0: SeekBar?) {
+            if (p0 != null) {
+                preferencesService.lowerStateOfChargeLimit = p0.progress
+            }
+        }
     }
 
     inner class UpperLimitBarListener : SeekBar.OnSeekBarChangeListener {
@@ -49,6 +67,10 @@ class MainActivity : AppCompatActivity() {
 
         override fun onStartTrackingTouch(p0: SeekBar?) { }
 
-        override fun onStopTrackingTouch(p0: SeekBar?) { }
+        override fun onStopTrackingTouch(p0: SeekBar?) {
+            if (p0 != null) {
+                preferencesService.upperStateOfChargeLimit = p0.progress
+            }
+        }
     }
 }

@@ -6,4 +6,7 @@
     <string name="low_battery_description">Extend battery life by keeping the charge level above %d</string>
     <string name="notify_when_battery_below">Notify when state of charge is below %d%%</string>
     <string name="notify_when_battery_above">Notify when state of charge is above %d%%</string>
+    <string name="preferences_file">shared_preferences</string>
+    <string name="lower_limit">lower_limit</string>
+    <string name="upper_limit">upper_limit</string>
 </resources>
