@@ -10,9 +10,11 @@ import javax.inject.Inject
 class BootEventReceiver : BroadcastReceiver() {
 
     @Inject lateinit var batteryCheckService: BatteryCheckService
+    @Inject lateinit var batteryNotificationUpdater: BatteryNotificationUpdater
 
     override fun onReceive(context: Context, intent: Intent) {
         if (Intent.ACTION_BOOT_COMPLETED == intent.action) {
+            batteryNotificationUpdater.update()
             batteryCheckService.activate()
         }
     }

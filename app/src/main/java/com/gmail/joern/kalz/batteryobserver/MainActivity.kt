@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     @Inject lateinit var batteryCheckService: BatteryCheckService
     @Inject lateinit var preferencesService: PreferencesService
+    @Inject lateinit var batteryNotificationUpdater: BatteryNotificationUpdater
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
             setOnSeekBarChangeListener(UpperLimitBarListener())
         }
 
+        batteryNotificationUpdater.update()
         batteryCheckService.activate()
     }
 
@@ -56,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         override fun onStopTrackingTouch(p0: SeekBar?) {
             if (p0 != null) {
                 preferencesService.lowerStateOfChargeLimit = p0.progress
+                batteryNotificationUpdater.update()
             }
         }
     }
@@ -70,6 +73,7 @@ class MainActivity : AppCompatActivity() {
         override fun onStopTrackingTouch(p0: SeekBar?) {
             if (p0 != null) {
                 preferencesService.upperStateOfChargeLimit = p0.progress
+                batteryNotificationUpdater.update()
             }
         }
     }

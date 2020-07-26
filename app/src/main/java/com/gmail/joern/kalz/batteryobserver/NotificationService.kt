@@ -13,9 +13,9 @@ private const val NOTIFICATION_ID = 1
 class NotificationService @Inject constructor(
     @ApplicationContext private val context: Context,
     private val buildVersionProvider: BuildVersionProvider,
-    private val notificationManagerCompat: NotificationManagerCompat,
+    private val defaultChannelNotificationManagerCompat: NotificationManagerCompat,
     private val notificationCompatBuilder: NotificationCompat.Builder,
-    @DefaultNotificationChannel private val channel: String
+    @DefaultNotificationChannel private val defaultChannelName: String
 ) {
 
     private var initialized = false
@@ -30,7 +30,12 @@ class NotificationService @Inject constructor(
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
-        notificationManagerCompat.notify(NOTIFICATION_ID, builder.build())
+        defaultChannelNotificationManagerCompat.notify(NOTIFICATION_ID, builder.build())
+    }
+
+    fun hide() {
+        initialize()
+        defaultChannelNotificationManagerCompat.cancel(NOTIFICATION_ID)
     }
 
     private fun initialize() {
@@ -41,7 +46,7 @@ class NotificationService @Inject constructor(
         val name = context.getString(R.string.channel_name)
         val descriptionText = context.getString(R.string.channel_description)
         val importance = NotificationManager.IMPORTANCE_DEFAULT
-        val channel = NotificationChannel(channel, name, importance).apply {
+        val channel = NotificationChannel(defaultChannelName, name, importance).apply {
             description = descriptionText
         }
 
